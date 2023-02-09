@@ -43,6 +43,8 @@ namespace OpenAI
 
             button.enabled = true;
             inputField.enabled = true;
+
+            
         }
     }
 }

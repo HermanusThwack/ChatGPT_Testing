@@ -33,7 +33,7 @@ public class ChatGPTReponseGenorator : MonoBehaviour
     TextMeshProUGUI reponseArea;
 
     [SerializeField]
-    private GameObject turnOff;
+    private GameObject turnOff , loading;
 
     private Coroutine Co_GenerateResponse;
     private int reponseCount = 0;
@@ -102,14 +102,14 @@ public class ChatGPTReponseGenorator : MonoBehaviour
 
     private async void SendReply(string Instruction)
     {
-
+        loading.SetActive(true);
         var completionResponse = await openai.CreateCompletion(new CreateCompletionRequest()
         {
             Prompt = Instruction,
             Model = "text-davinci-003",
             MaxTokens = 128
         });
-
+        loading.SetActive(false);
         reponseArea.text = completionResponse.Choices[0].Text;
     }
 }
